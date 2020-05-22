@@ -12,6 +12,20 @@
         <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Edit" Command="{Binding EditCommand}" />
+            <Button Text="Cancel" Command="{Binding CancelEditCommand}" />
+            <Button Text="Save" Command="{Binding SaveEditCommand}" />
+        </StackLayout>
+        <Label Text="23:55" HorizontalOptions="CenterAndExpand" FontSize="43" />
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Start" Command="{Binding StartTimerCommand}" />
+            <Button Text="Pause" Command="{Binding PauseTimerCommand}" />
+            <Button Text="Resume" Command="{Binding ResumeTimerCommand}" />
+            <Button Text="Stop" Command="{Binding StopTimerCommand}" />
+        </StackLayout>
+        <Button Text="Exit Back" Command="{Binding ExitCommand}" HorizontalOptions="CenterAndExpand" />
+
     </StackLayout>
     
 </ContentPage>
