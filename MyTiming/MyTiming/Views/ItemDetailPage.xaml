@@ -17,7 +17,22 @@
             <Button Text="Cancel" Command="{Binding CancelEditCommand}" />
             <Button Text="Save" Command="{Binding SaveEditCommand}" />
         </StackLayout>
-        <Label Text="23:55" HorizontalOptions="CenterAndExpand" FontSize="43" />
+        <Label HorizontalOptions="CenterAndExpand" FontSize="43" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding THours, StringFormat='{0:D2}'}" />
+                    <Span Text=":" />
+                    <!--
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" />
+                        </Span.GestureRecognizers>
+                        -->
+                    <Span Text="{Binding TMinutes, StringFormat='{0:D2}'}" />
+                    <Span Text=":" />
+                    <Span Text="{Binding TSeconds, StringFormat='{0:D2}'}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
         <StackLayout Orientation="Horizontal">
             <Button Text="Start" Command="{Binding StartTimerCommand}" />
             <Button Text="Pause" Command="{Binding PauseTimerCommand}" />

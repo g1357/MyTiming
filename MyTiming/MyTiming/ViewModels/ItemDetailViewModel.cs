@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Runtime.InteropServices.ComTypes;
 using MyTiming.Models;
 using Xamarin.Forms;
 
@@ -64,6 +64,40 @@ namespace MyTiming.ViewModels
             }
         }
 
+        private int _tHours;
+        public int THours
+        {
+            get => _tHours;
+            set
+            {
+                SetProperty(ref _tHours, value);
+            }
+        }
+
+
+        private int _tMinutes;
+        public int TMinutes
+        {
+            get => _tMinutes;
+            set
+            {
+                SetProperty(ref _tMinutes, value);
+            }
+        }
+
+        private int _tSeconds;
+        public int TSeconds
+        {
+            get => _tSeconds;
+            set
+            {
+                SetProperty(ref _tSeconds, value);
+            }
+        }
+
+        private DateTime startDT;
+        private TimeSpan _base;
+
         public Command EditCommand { get; private set; }
         public Command CancelEditCommand { get; private set; }
         public Command SaveEditCommand { get; private set; }
@@ -73,7 +107,7 @@ namespace MyTiming.ViewModels
         public Command StopTimerCommand { get; private set; }
         public Command ExitCommand { get; private set; }
 
-        public ItemDetailViewModel(Item item = null)
+        public ItemDetailViewModel(ref Item item) // = null)
         {
             Title = item?.Text;
             Item = item;
@@ -115,6 +149,10 @@ namespace MyTiming.ViewModels
                 execute: async () =>
                 {
                     CurrentTimerMode = TimerMode.Started;
+                    startDT = DateTime.Now;
+                    _base = new TimeSpan(0);
+
+                    ActivatedTimer();
                 },
                 canExecute: () =>
                 {
@@ -126,6 +164,7 @@ namespace MyTiming.ViewModels
                 execute: async () =>
                 {
                     CurrentTimerMode = TimerMode.Paused;
+                    _base += DateTime.Now - startDT;
                 },
                 canExecute: () =>
                 {
@@ -137,6 +176,9 @@ namespace MyTiming.ViewModels
                 execute: async () =>
                 {
                     CurrentTimerMode = TimerMode.Started;
+                    startDT = DateTime.Now;
+
+                    ActivatedTimer();
                 },
                 canExecute: () =>
                 {
@@ -148,6 +190,15 @@ namespace MyTiming.ViewModels
                 execute: async () =>
                 {
                     CurrentTimerMode = TimerMode.Stopped;
+                    _base += DateTime.Now - startDT;
+                    var a = _base.TotalSeconds - _base.Seconds;
+                    int s = 0;
+                    if (a >= 0.5)
+                    {
+                        s = 1;
+                    }
+                    _base = new TimeSpan(_base.Hours, _base.Minutes, _base.Seconds + s);
+
                 },
                 canExecute: () =>
                 {
@@ -157,12 +208,33 @@ namespace MyTiming.ViewModels
             ExitCommand = new Command(
                 execute: async () =>
                 {
+                    CurrentTimerMode = TimerMode.Stopped;
+                    Item.TimeSpended = _base;
                 },
                 canExecute: () =>
                 {
                     return !EditFlag;
                 }
             );
+        }
+
+        void ActivatedTimer()
+        {
+            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+            {
+                var flag = (CurrentTimerMode == TimerMode.Started);
+                if (flag)
+                {
+                    TimeSpan ts = DateTime.Now - startDT + _base;
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        THours = ts.Hours;
+                        TMinutes = ts.Minutes;
+                        TSeconds = ts.Seconds;
+                    });
+                }
+                return flag;
+            });
         }
     }
 }

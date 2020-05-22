@@ -9,5 +9,6 @@ namespace MyTiming.Models
     /// </summary>
     public class Record
     {
+        public int Id;
     }
 }

@@ -32,7 +32,7 @@ namespace MyTiming.Views
                 Description = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel(ref item);
             BindingContext = viewModel;
         }
     }

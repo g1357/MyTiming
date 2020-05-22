@@ -32,7 +32,20 @@
                                 d:Text="{Binding .}"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
+                                FontSize="16" >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Text, StringFormat='{0}'}" />
+                                    <Span Text=" - " />
+                                    <!--
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" />
+                        </Span.GestureRecognizers>
+                        -->
+                                    <Span Text="{Binding TimeSpended, StringFormat='{0:c}'}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
                         <Label Text="{Binding Description}" 
                                 d:Text="Item descripton"
                                 LineBreakMode="NoWrap"
