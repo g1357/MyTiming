@@ -113,7 +113,7 @@ namespace MyTiming.ViewModels
             Item = item;
 
             EditCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     EditFlag = true;
                 },
@@ -124,7 +124,7 @@ namespace MyTiming.ViewModels
             );
 
             CancelEditCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     EditFlag = false;
                 },
@@ -135,7 +135,7 @@ namespace MyTiming.ViewModels
             );
 
             SaveEditCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     EditFlag = false;
                 },
@@ -146,13 +146,13 @@ namespace MyTiming.ViewModels
             );
 
             StartTimerCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     CurrentTimerMode = TimerMode.Started;
                     startDT = DateTime.Now;
                     _base = new TimeSpan(0);
 
-                    ActivatedTimer();
+                    ActivateTimer();
                 },
                 canExecute: () =>
                 {
@@ -161,7 +161,7 @@ namespace MyTiming.ViewModels
             );
 
             PauseTimerCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     CurrentTimerMode = TimerMode.Paused;
                     _base += DateTime.Now - startDT;
@@ -173,12 +173,12 @@ namespace MyTiming.ViewModels
             );
 
             ResumeTimerCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
                     CurrentTimerMode = TimerMode.Started;
                     startDT = DateTime.Now;
 
-                    ActivatedTimer();
+                    ActivateTimer();
                 },
                 canExecute: () =>
                 {
@@ -187,18 +187,9 @@ namespace MyTiming.ViewModels
             );
 
             StopTimerCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
-                    CurrentTimerMode = TimerMode.Stopped;
-                    _base += DateTime.Now - startDT;
-                    var a = _base.TotalSeconds - _base.Seconds;
-                    int s = 0;
-                    if (a >= 0.5)
-                    {
-                        s = 1;
-                    }
-                    _base = new TimeSpan(_base.Hours, _base.Minutes, _base.Seconds + s);
-
+                    StopTimer();
                 },
                 canExecute: () =>
                 {
@@ -206,10 +197,12 @@ namespace MyTiming.ViewModels
                 }
             );
             ExitCommand = new Command(
-                execute: async () =>
+                execute: () =>
                 {
-                    CurrentTimerMode = TimerMode.Stopped;
+                    StopTimer();
                     Item.TimeSpended = _base;
+                    //App.Current.MainPage.Navigation.PopAsync();
+                    App.Current.MainPage.SendBackButtonPressed();
                 },
                 canExecute: () =>
                 {
@@ -218,7 +211,7 @@ namespace MyTiming.ViewModels
             );
         }
 
-        void ActivatedTimer()
+        void ActivateTimer()
         {
             Device.StartTimer(new TimeSpan(0, 0, 1), () =>
             {
@@ -235,6 +228,22 @@ namespace MyTiming.ViewModels
                 }
                 return flag;
             });
+        }
+
+        void StopTimer()
+        {
+            if (CurrentTimerMode == TimerMode.Started)
+            {
+                _base += DateTime.Now - startDT;
+            }
+            CurrentTimerMode = TimerMode.Stopped;
+            var a = _base.TotalSeconds - _base.Seconds;
+            int s = 0;
+            if (a >= 0.5)
+            {
+                s = 1;
+            }
+            _base = new TimeSpan(_base.Hours, _base.Minutes, _base.Seconds + s);
         }
     }
 }

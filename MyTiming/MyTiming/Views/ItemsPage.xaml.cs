@@ -32,6 +32,8 @@ namespace MyTiming.Views
             var layout = (BindableObject)sender;
             var item = (Item)layout.BindingContext;
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(ref item)));
+            //viewModel?.Items?.OnPropertyChanged(new PropertyChangedEventArgs("Items"));
+            //viewModel?.Items?.OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs("Items"));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
