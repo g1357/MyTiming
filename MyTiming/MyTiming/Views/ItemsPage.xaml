@@ -42,7 +42,7 @@
                             <TapGestureRecognizer Command="{Binding TapCommand}" />
                         </Span.GestureRecognizers>
                         -->
-                                    <Span Text="{Binding TimeSpended, StringFormat='{0:c}'}" />
+                                    <Span Text="{Binding TimeSpended, StringFormat='{0:hh\\:mm\\:ss}'}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
