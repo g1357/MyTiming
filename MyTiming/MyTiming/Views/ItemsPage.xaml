@@ -9,12 +9,11 @@
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
 
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-        <CollectionView x:Name="ItemsCollectionView"
-                ItemsSource="{Binding Items}">
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
             <d:CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>First Item</x:String>
@@ -28,31 +27,22 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Label Text="{Binding Text}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" >
+                        <Label Text="{Binding Text}" d:Text="{Binding .}" LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" FontSize="16" >
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="{Binding Text, StringFormat='{0}'}" />
                                     <Span Text=" - " />
-                                    <!--
-                        <Span.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding TapCommand}" />
-                        </Span.GestureRecognizers>
-                        -->
                                     <Span Text="{Binding TimeSpended, StringFormat='{0:hh\\:mm\\:ss}'}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label Text="{Binding Description}" 
-                                d:Text="Item descripton"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                        <Label Text="{Binding Description}" d:Text="Item descripton" LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                Command="{Binding Source={x:Reference BrowseItemsPage}, 
+                                Path=BindingContext.ItemSelectCommand}" CommandParameter="{Binding}" />
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </DataTemplate>

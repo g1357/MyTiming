@@ -16,7 +16,13 @@ namespace MyTiming.ViewModels
             Started, // Таймер запущен
             Paused   // Таймер поставлен на паузу
         }
-        public Item Item { get; set; }
+        private Item _item;
+        public Item Item { 
+            get => _item;
+            set => SetProperty(ref _item, value);
+        }
+
+        Item _savedItem;
 
         /// <summary>
         ///  Поле: Признак режима редактирования
@@ -40,9 +46,11 @@ namespace MyTiming.ViewModels
                     ResumeTimerCommand.ChangeCanExecute();
                     StopTimerCommand.ChangeCanExecute();
                     ExitCommand.ChangeCanExecute();
+                    OnPropertyChanged("ReadOnly");
                 }
             }
         }
+        public bool ReadOnly => !_editFlag;
 
         private TimerMode _currentTimerMode = TimerMode.Stopped;
         public TimerMode CurrentTimerMode
@@ -115,6 +123,7 @@ namespace MyTiming.ViewModels
             EditCommand = new Command(
                 execute: () =>
                 {
+                    _savedItem = new Item() { Id = Item.Id, Text = Item.Text, Description = Item.Description, TimeSpended = Item.TimeSpended };
                     EditFlag = true;
                 },
                 canExecute: () =>
@@ -126,6 +135,9 @@ namespace MyTiming.ViewModels
             CancelEditCommand = new Command(
                 execute: () =>
                 {
+                    Item.Text = _savedItem.Text;
+                    Item.Description = _savedItem.Description;
+                    OnPropertyChanged("Item");
                     EditFlag = false;
                 },
                 canExecute: () =>

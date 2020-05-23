@@ -24,21 +24,7 @@ namespace MyTiming.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
-        }
-
-        async void OnItemSelected(object sender, EventArgs args)
-        {
-            var layout = (BindableObject)sender;
-            var item = (Item)layout.BindingContext;
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(ref item)));
-            //viewModel?.Items?.OnPropertyChanged(new PropertyChangedEventArgs("Items"));
-            //viewModel?.Items?.OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs("Items"));
-        }
-
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            BindingContext = viewModel = new ItemsViewModel(this);
         }
 
         protected override void OnAppearing()
@@ -47,6 +33,8 @@ namespace MyTiming.Views
 
             if (viewModel.Items.Count == 0)
                 viewModel.IsBusy = true;
+
+            viewModel.ExecuteLoadItemsCommand().Wait();
         }
     }
 }

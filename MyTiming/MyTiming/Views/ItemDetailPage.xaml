@@ -9,9 +9,9 @@
 
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
+        <Entry Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small" IsReadOnly="{Binding ReadOnly}" />
         <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+        <Entry Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small" IsReadOnly="{Binding ReadOnly}" />
         <StackLayout Orientation="Horizontal">
             <Button Text="Edit" Command="{Binding EditCommand}" />
             <Button Text="Cancel" Command="{Binding CancelEditCommand}" />
