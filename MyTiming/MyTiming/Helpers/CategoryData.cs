@@ -10,7 +10,7 @@ namespace MyTiming.Helpers
     {
         public static readonly string[] CatIcon =
         {
-            "folder.png", "sleeping.ng", "work.png", "dinning.png", "sport.png", "car.png",
+            "folder.png", "sleeping.png", "work.png", "dinning.png", "sport.png", "car.png",
             "drawing.png", "entertainment.png", "reading.png", "house.png", "pray.png"    
         };
 

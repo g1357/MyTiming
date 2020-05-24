@@ -160,9 +160,6 @@
     <BundleResource Include="Resources\reading.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\sleeping.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\sport.png" />
   </ItemGroup>
   <ItemGroup>
@@ -176,5 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\drawing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\content.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sleeping.png" />
   </ItemGroup>
 </Project>
