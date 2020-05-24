@@ -31,8 +31,11 @@
 
     <!-- Your Pages -->
     <TabBar>
-        <Tab Title="Browse" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <Tab Title="Tasks" Icon="tab_feed.png">
+            <ShellContent Title="My Tasks" Icon="work.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        </Tab>
+        <Tab Title="Categoris" Icon="content.png" >
+            <ShellContent ContentTemplate="{DataTemplate local:CategoriesPage}"/>
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />

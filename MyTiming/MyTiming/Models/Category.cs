@@ -13,7 +13,7 @@ namespace MyTiming.Models
         /// <summary>
         /// Идентификатор категории
         /// </summary>
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Название категории
@@ -26,9 +26,9 @@ namespace MyTiming.Models
         public string Description { get; set; }
        
         /// <summary>
-        /// Иконка категории
+        /// Индекс иконки категории
         /// </summary>
-        public string Icon { get; set; }
+        public string IconFile { get; set; }
         
         /// <summary>
         /// Цвет категории

@@ -144,4 +144,37 @@
       <Name>MyTiming</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\entertainment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\reading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sleeping.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\work.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dinning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\drawing.png" />
+  </ItemGroup>
 </Project>

@@ -88,12 +88,26 @@
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
     <AndroidResource Include="Resources\drawable\tab_about.png" />
     <AndroidResource Include="Resources\drawable\tab_feed.png" />
+    <AndroidResource Include="Resources\drawable\entertainment.png" />
+    <AndroidResource Include="Resources\drawable\folder.png" />
+    <AndroidResource Include="Resources\drawable\house.png" />
+    <AndroidResource Include="Resources\drawable\pray.png" />
+    <AndroidResource Include="Resources\drawable\reading.png" />
+    <AndroidResource Include="Resources\drawable\sleeping.png" />
+    <AndroidResource Include="Resources\drawable\sport.png" />
+    <AndroidResource Include="Resources\drawable\work.png" />
+    <AndroidResource Include="Resources\drawable\car.png" />
+    <AndroidResource Include="Resources\drawable\dinning.png" />
+    <AndroidResource Include="Resources\drawable\drawing.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyTiming\MyTiming.csproj">
       <Project>{E069AA3F-D8F7-47B4-A00D-E2EDF2D8C4A2}</Project>
       <Name>MyTiming</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\content.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
