@@ -180,4 +180,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\sleeping.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sendmail.png" />
+  </ItemGroup>
 </Project>

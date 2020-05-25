@@ -4,7 +4,7 @@
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
-       xmlns:local="clr-namespace:MyTiming.Views"
+       xmlns:view="clr-namespace:MyTiming.Views"
        Title="MyTiming"
        x:Class="MyTiming.AppShell">
 
@@ -30,16 +30,19 @@
     </Shell.Resources>
 
     <!-- Your Pages -->
-    <TabBar>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        
         <Tab Title="Tasks" Icon="tab_feed.png">
-            <ShellContent Title="My Tasks" Icon="work.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+            <ShellContent Title="My Tasks" Icon="work.png" ContentTemplate="{DataTemplate view:ItemsPage}" />
         </Tab>
         <Tab Title="Categoris" Icon="content.png" >
-            <ShellContent ContentTemplate="{DataTemplate local:CategoriesPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate view:CategoriesPage}"/>
         </Tab>
         <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+            <ShellContent ContentTemplate="{DataTemplate view:AboutPage}" />
         </Tab>
+    </FlyoutItem>
+    <TabBar>
     </TabBar>
 
     <!-- Optional Templates 
@@ -71,5 +74,8 @@
     </Shell.MenuItemTemplate>
 
     -->
-
+    <ShellContent Icon="sendmail.png" Title="Send E=Mail"
+        ContentTemplate="{DataTemplate view:SendMailPage}" />
+    <MenuItem Text="Send E-Mail" IconImageSource="sendmail.png"
+        Command="{Binding SendMailPageCommand}" />
 </Shell>
