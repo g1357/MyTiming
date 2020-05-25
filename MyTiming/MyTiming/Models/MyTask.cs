@@ -7,7 +7,7 @@ namespace MyTiming.Models
     /// <summary>
     /// Мои задачи (проекты)
     /// </summary>
-    public class MyTask
+    public class MyTask : IModel
     {
         /// <summary>
         /// Идентификатор задачи

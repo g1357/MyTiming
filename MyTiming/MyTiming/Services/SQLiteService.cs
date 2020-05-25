@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,33 +11,33 @@ namespace MyTiming.Services
     /// <summary>
     /// Сервис работы с записями в локальной БД SQLite
     /// </summary>
-    public class RecordDbService
-    {
+    abstract public class SQLiteService<T> where T : class, IModel, new()     {
         readonly SQLiteAsyncConnection _database;
         readonly string _dbPath;
 
-        public RecordDbService(string dbPath)
+        public SQLiteService(string dbName)
         {
-            _dbPath = dbPath;
-            _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableAsync<Record>().Wait();
+            _dbPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbName);
+            _database = new SQLiteAsyncConnection(_dbPath);
+            _database.CreateTableAsync<T>().Wait();
         }
 
-        public Task<List<Record>> GetRecordsAsync()
+        public Task<List<T>> GetRecordsAsync()
         {
-            return _database.Table<Record>().ToListAsync();
+            return _database.Table<T>().ToListAsync();
         }
 
-        public Task<Record> GetRecordAsync(int id)
+        public Task<T> GetRecordAsync(string id)
         {
-            return _database.Table<Record>()
+            return _database.Table<T>()
                 .Where(r => r.Id == id)
                 .FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveRecordAsync(Record record)
+        public Task<int> SaveRecordAsync(T record)
         {
-            if (record.Id != 0)
+            if (!string.IsNullOrEmpty(record.Id))
             {
                 return _database.UpdateAsync(record);
             }
@@ -46,7 +47,7 @@ namespace MyTiming.Services
 ;            }
         }
 
-        public Task<int> DeleteRecordAsync(Record record)
+        public Task<int> DeleteRecordAsync(T record)
         {
             return _database.DeleteAsync(record);
         }
