@@ -24,6 +24,7 @@ namespace MyTiming
                 DependencyService.Register<MockDataStore>();
             else
                 DependencyService.Register<AzureDataStore>();
+            DependencyService.Register<MyTasksDataStore>();
             MainPage = new AppShell();
         }
 

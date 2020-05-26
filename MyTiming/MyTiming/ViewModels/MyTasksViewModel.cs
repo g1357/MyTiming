@@ -8,32 +8,34 @@ using Xamarin.Forms;
 using MyTiming.Models;
 using MyTiming.Views;
 using MyTiming.Services;
+using MyTiming.Helpers;
 
 namespace MyTiming.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class MyTasksViewModel : BaseViewModel
     {
-        ItemsPage _page;
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        MyTasksPage _page;
+        public IDataStore<MyTask> DataStore => DependencyService.Get<IDataStore<MyTask>>();
 
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<MyTaskEx> Items { get; set; }
         public Command LoadItemsCommand { get; private set; }
         public Command AddItemCommand { get; private set; }
         public Command ItemSelectCommand { get; private set; }
 
-        public ItemsViewModel(ItemsPage page)
+        public MyTasksViewModel(MyTasksPage page)
         {
             _page = page;
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<MyTaskEx>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new Command(async () => await ExecuteAddItemCommand());
             ItemSelectCommand = new Command<Item>(async (item) => await ExecuteItemSelectCommand(item)); 
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, MyTask>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Item;
-                Items.Add(newItem);
+                var newItem = item as MyTask;
+                var newItemEx = new MyTaskEx(newItem);
+                Items.Add(newItemEx);
                 await DataStore.AddItemAsync(newItem);
             });
         }
@@ -46,9 +48,11 @@ namespace MyTiming.ViewModels
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
+                MyTaskEx itemEx;
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    itemEx = new MyTaskEx(item);
+                    Items.Add(itemEx);
                 }
             }
             catch (Exception ex)

@@ -37,7 +37,7 @@ namespace MyTiming.Services
 
         public Task<int> SaveRecordAsync(T record)
         {
-            if (!string.IsNullOrEmpty(record.Id))
+            if (string.IsNullOrEmpty(record.Id))
             {
                 return _database.UpdateAsync(record);
             }

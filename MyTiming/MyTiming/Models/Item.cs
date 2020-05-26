@@ -10,6 +10,5 @@ namespace MyTiming.Models
         public TimeSpan TimeSpended { get; set; }
         public TimeSpan TotalTimeSpended { get; set; }
         public string CategoryId { get; set; }
-
     }
 }

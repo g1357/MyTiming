@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyTiming.Views.MyTasksPage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid BackgroundColor="{Binding CategoryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" LineBreakMode="NoWrap" FontAttributes="Bold"
+                                Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                        <Image Source="{Binding CategoryIconFile}" Grid.RowSpan="2"/>
+                        <Label Text="{Binding CategoryName}" Grid.Row="1" Grid.Column="1" LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                        <Label Text="{Binding TimeSpended, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Row="1" Grid.Column="2"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                Command="{Binding Source={x:Reference BrowseItemsPage}, 
+                                Path=BindingContext.ItemSelectCommand}" CommandParameter="{Binding}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView> 
+</ContentPage>

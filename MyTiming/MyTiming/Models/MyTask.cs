@@ -25,6 +25,16 @@ namespace MyTiming.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// Последнее время задачи
+        /// </summary>
+        public TimeSpan TimeSpended { get; set; }
+
+        /// <summary>
+        /// Общее время задачи
+        /// </summary>
+        public TimeSpan TotalTimeSpended { get; set; }
+
+        /// <summary>
         /// Идентификатор категории задачи
         /// </summary>
         public string CategoryId { get; set; }

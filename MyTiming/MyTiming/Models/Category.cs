@@ -8,12 +8,12 @@ namespace MyTiming.Models
     /// <summary>
     /// Категории задач (проектов)
     /// </summary>
-    public class Category
+    public class Category : IModel
     {
         /// <summary>
         /// Идентификатор категории
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Название категории
