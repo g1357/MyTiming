@@ -11,12 +11,16 @@ using Xamarin.Forms;
 
 namespace MyTiming.ViewModels
 {
-    class CategoriesViewModel : BaseViewModel
+    public class CategoriesViewModel : BaseViewModel
     {
         CategoriesPage _page;
 
+        bool flagEdit;
+        Category categor;
+
         public ObservableCollection<Category> Items { get; set; }
 
+        public Command ItemSelectCommand { get; set; }
 
         public CategoriesViewModel(CategoriesPage page)
         {
@@ -24,7 +28,29 @@ namespace MyTiming.ViewModels
             Title = "Categories of My Tasks";
 
             Items = new ObservableCollection<Category>(CategoryData.TaskCategory);
+            flagEdit = false;
+        }
 
+        public CategoriesViewModel(ref Category newCategory)
+        {
+            categor = newCategory;
+            Title = "Categories of My Tasks";
+
+            Items = new ObservableCollection<Category>(CategoryData.TaskCategory);
+            flagEdit = true;
+
+            ItemSelectCommand = new Command<Category>( async (cat) =>
+            {
+                if (flagEdit)
+                {
+                    categor.Id = cat.Id;
+                    categor.Name = cat.Name;
+                    categor.Description = cat.Description;
+                    categor.IconFile = cat.IconFile;
+                    categor.Color = cat.Color;
+                    App.Current.MainPage.SendBackButtonPressed();
+                }
+            });
         }
 
     }

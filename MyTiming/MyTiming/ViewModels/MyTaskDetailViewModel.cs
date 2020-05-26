@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Runtime.InteropServices.ComTypes;
 using MyTiming.Models;
+using MyTiming.Views;
 using Xamarin.Forms;
 
 namespace MyTiming.ViewModels
 {
     public class MyTaskDetailViewModel : BaseViewModel
     {
+        MyTaskDetailPage _page;
+
         /// <summary>
         /// Режим работы таймера
         /// </summary>
@@ -41,6 +44,7 @@ namespace MyTiming.ViewModels
                     EditCommand.ChangeCanExecute();
                     CancelEditCommand.ChangeCanExecute();
                     SaveEditCommand.ChangeCanExecute();
+                    ChangeCategoryCommand.ChangeCanExecute();
                     StartTimerCommand.ChangeCanExecute();
                     PauseTimerCommand.ChangeCanExecute();
                     ResumeTimerCommand.ChangeCanExecute();
@@ -109,6 +113,7 @@ namespace MyTiming.ViewModels
         public Command EditCommand { get; private set; }
         public Command CancelEditCommand { get; private set; }
         public Command SaveEditCommand { get; private set; }
+        public Command ChangeCategoryCommand { get; private set; }
         public Command StartTimerCommand { get; private set; }
         public Command PauseTimerCommand { get; private set; }
         public Command ResumeTimerCommand { get; private set; }
@@ -150,6 +155,21 @@ namespace MyTiming.ViewModels
                 execute: () =>
                 {
                     EditFlag = false;
+                },
+                canExecute: () =>
+                {
+                    return EditFlag;
+                }
+            );
+
+            ChangeCategoryCommand = new Command(
+                execute: async () =>
+                {
+                    Category newCategory = new Category();
+                    await _page.Navigation.PushAsync(new CategoriesPage(new CategoriesViewModel(ref newCategory)));
+                    var temp = newCategory.Id;
+                    Item.SetCategory(newCategory);
+                    OnPropertyChanged("Item");
                 },
                 canExecute: () =>
                 {
@@ -223,6 +243,10 @@ namespace MyTiming.ViewModels
             );
         }
 
+        public void SetPage(MyTaskDetailPage page)
+        {
+            _page = page;
+        }
         void ActivateTimer()
         {
             Device.StartTimer(new TimeSpan(0, 0, 1), () =>

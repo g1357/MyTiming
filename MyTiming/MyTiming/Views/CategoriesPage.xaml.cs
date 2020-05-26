@@ -22,5 +22,12 @@ namespace MyTiming.Views
             BindingContext = viewModel = new CategoriesViewModel(this);
 
         }
+
+        public CategoriesPage(CategoriesViewModel viewModel)
+        {
+            InitializeComponent();
+
+            BindingContext = this.viewModel = viewModel;
+        }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MyTiming.Views.CategoriesPage"
+             x:Name="CategoriesView"
              Title="{Binding Title}" >
     <CollectionView x:Name="CategoriesCollectionView" ItemsSource="{Binding Items}">
         <CollectionView.ItemTemplate>
@@ -16,6 +17,11 @@
                             Style="{DynamicResource ListItemTextStyle}" BackgroundColor="{Binding Color}" Margin="0,0,0,0" />
                         <Label Text="{Binding Description}" LineBreakMode="NoWrap" FontSize="13"
                             Style="{DynamicResource ListItemDetailTextStyle}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                Command="{Binding Source={x:Reference CategoriesView}, 
+                                Path=BindingContext.ItemSelectCommand}" CommandParameter="{Binding}" />
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </StackLayout>
             </DataTemplate>

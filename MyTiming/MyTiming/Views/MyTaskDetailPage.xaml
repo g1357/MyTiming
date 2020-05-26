@@ -24,6 +24,7 @@
             <Button Text="Edit" Command="{Binding EditCommand}" />
             <Button Text="Cancel" Command="{Binding CancelEditCommand}" />
             <Button Text="Save" Command="{Binding SaveEditCommand}" />
+            <Button Text="Categoty" Command="{Binding ChangeCategoryCommand}" />
         </StackLayout>
         <Label HorizontalOptions="CenterAndExpand" FontSize="43" >
             <Label.FormattedText>

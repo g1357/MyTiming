@@ -19,6 +19,7 @@ namespace MyTiming.Views
         {
             InitializeComponent();
 
+            viewModel.SetPage(this);
             BindingContext = this.viewModel = viewModel;
         }
 

@@ -91,5 +91,14 @@ namespace MyTiming.Models
             CategoryColor = item.CategoryColor;
         }
 
+        public void SetCategory(Category cat)
+        {
+            CategoryId = cat.Id;
+            CategoryName = cat.Name;
+            CategoryDescription = cat.Description;
+            CategoryIconFile = cat.IconFile;
+            CategoryColor = cat.Color;
+        }
+
     }
 }
