@@ -29,7 +29,7 @@ namespace MyTiming.ViewModels
             Items = new ObservableCollection<MyTaskEx>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new Command(async () => await ExecuteAddItemCommand());
-            ItemSelectCommand = new Command<Item>(async (item) => await ExecuteItemSelectCommand(item)); 
+            ItemSelectCommand = new Command<MyTaskEx>(async (item) => await ExecuteItemSelectCommand(item)); 
 
             MessagingCenter.Subscribe<NewItemPage, MyTask>(this, "AddItem", async (obj, item) =>
             {
@@ -69,9 +69,9 @@ namespace MyTiming.ViewModels
         {
             await _page.Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
-        async Task ExecuteItemSelectCommand(Item item)
+        async Task ExecuteItemSelectCommand(MyTaskEx item)
         {
-            await _page.Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(ref item)));
+            await _page.Navigation.PushAsync(new MyTaskDetailPage(new MyTaskDetailViewModel(ref item)));
         }
 
 

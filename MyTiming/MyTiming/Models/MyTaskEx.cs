@@ -77,6 +77,19 @@ namespace MyTiming.Models
             CategoryIconFile = cat.IconFile;
             CategoryColor = cat.Color;
         }
+        public MyTaskEx(MyTaskEx item)
+        {
+            Id = item.Id;
+            Name = item.Name;
+            Description = item.Description;
+            TimeSpended = item.TimeSpended;
+            TotalTimeSpended = item.TotalTimeSpended;
+            CategoryId = item.CategoryId;
+            CategoryName = item.CategoryName;
+            CategoryDescription = item.CategoryDescription;
+            CategoryIconFile = item.CategoryIconFile;
+            CategoryColor = item.CategoryColor;
+        }
 
     }
 }

@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="MyTiming.Views.MyTasksPage"
              Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
+             x:Name="BrowseMyTasksPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
@@ -34,7 +34,7 @@
                         <Label Text="{Binding TimeSpended, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Row="1" Grid.Column="2"/>
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1"
-                                Command="{Binding Source={x:Reference BrowseItemsPage}, 
+                                Command="{Binding Source={x:Reference BrowseMyTasksPage}, 
                                 Path=BindingContext.ItemSelectCommand}" CommandParameter="{Binding}" />
                         </Grid.GestureRecognizers>
                     </Grid>

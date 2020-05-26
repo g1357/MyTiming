@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\MyTaskDetailPage.xaml.cs">
+      <DependentUpon>MyTaskDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
     </Compile>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyTiming.Views.MyTaskDetailPage"
+             Title="{Binding Title}">
+
+    <StackLayout Spacing="2" Padding="15">
+        <Label Text="Task:" FontSize="Medium" />
+        <Entry Text="{Binding Item.Name}" d:Text="Item name" FontSize="Small" IsReadOnly="{Binding ReadOnly}" />
+        <Label Text="Description:" FontSize="Medium" />
+        <Entry Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small" IsReadOnly="{Binding ReadOnly}" />
+        <Label Text="Категория задачи" />
+        <StackLayout Orientation="Horizontal" BackgroundColor="{Binding Item.CategoryColor}">
+            <Image Source="{Binding Item.CategoryIconFile}" />
+            <StackLayout>
+                <Label Text="{Binding Item.CategoryName}" FontAttributes="Bold"/>
+                <Label Text="{Binding Item.CategoryDescription}" />
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Edit" Command="{Binding EditCommand}" />
+            <Button Text="Cancel" Command="{Binding CancelEditCommand}" />
+            <Button Text="Save" Command="{Binding SaveEditCommand}" />
+        </StackLayout>
+        <Label HorizontalOptions="CenterAndExpand" FontSize="43" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding THours, StringFormat='{0:D2}'}" />
+                    <Span Text=":" />
+                    <!--
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" />
+                        </Span.GestureRecognizers>
+                        -->
+                    <Span Text="{Binding TMinutes, StringFormat='{0:D2}'}" />
+                    <Span Text=":" />
+                    <Span Text="{Binding TSeconds, StringFormat='{0:D2}'}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Start" Command="{Binding StartTimerCommand}" />
+            <Button Text="Pause" Command="{Binding PauseTimerCommand}" />
+            <Button Text="Resume" Command="{Binding ResumeTimerCommand}" />
+            <Button Text="Stop" Command="{Binding StopTimerCommand}" />
+        </StackLayout>
+        <Button Text="Exit Back" Command="{Binding ExitCommand}" HorizontalOptions="CenterAndExpand" />
+
+    </StackLayout>
+    
+</ContentPage>
