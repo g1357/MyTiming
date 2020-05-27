@@ -80,10 +80,7 @@ namespace MyTiming.ViewModels
         public int THours
         {
             get => _tHours;
-            set
-            {
-                SetProperty(ref _tHours, value);
-            }
+            set => SetProperty(ref _tHours, value);
         }
 
 
@@ -91,20 +88,14 @@ namespace MyTiming.ViewModels
         public int TMinutes
         {
             get => _tMinutes;
-            set
-            {
-                SetProperty(ref _tMinutes, value);
-            }
+            set => SetProperty(ref _tMinutes, value);
         }
 
         private int _tSeconds;
         public int TSeconds
         {
             get => _tSeconds;
-            set
-            {
-                SetProperty(ref _tSeconds, value);
-            }
+            set => SetProperty(ref _tSeconds, value);
         }
 
         private DateTime startDT;
@@ -165,11 +156,9 @@ namespace MyTiming.ViewModels
             ChangeCategoryCommand = new Command(
                 execute: async () =>
                 {
-                    Category newCategory = new Category();
-                    await _page.Navigation.PushAsync(new CategoriesPage(new CategoriesViewModel(ref newCategory)));
-                    var temp = newCategory.Id;
-                    Item.SetCategory(newCategory);
-                    OnPropertyChanged("Item");
+                    Category cat = new Category();
+                    MessagingCenter.Subscribe<CategoriesViewModel, Category>(this, "ChangeCatagory", (vm, c) => { ChangeCategory(vm, c); });
+                    await _page.Navigation.PushAsync(new CategoriesPage(new CategoriesViewModel(ref cat)));
                 },
                 canExecute: () =>
                 {
@@ -280,6 +269,14 @@ namespace MyTiming.ViewModels
                 s = 1;
             }
             _base = new TimeSpan(_base.Hours, _base.Minutes, _base.Seconds + s);
+        }
+
+        void ChangeCategory(CategoriesViewModel viewModel, Category category)
+        {
+            Item.SetCategory(category);
+            OnPropertyChanged("Item");
+            MessagingCenter.Unsubscribe<CategoriesViewModel, Category>(this, "ChangeCatagory");
+
         }
     }
 }

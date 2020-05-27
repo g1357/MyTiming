@@ -43,11 +43,12 @@ namespace MyTiming.ViewModels
             {
                 if (flagEdit)
                 {
-                    categor.Id = cat.Id;
-                    categor.Name = cat.Name;
-                    categor.Description = cat.Description;
-                    categor.IconFile = cat.IconFile;
-                    categor.Color = cat.Color;
+                    //categor.Id = cat.Id;
+                    //categor.Name = cat.Name;
+                    //categor.Description = cat.Description;
+                    //categor.IconFile = cat.IconFile;
+                    //categor.Color = cat.Color;
+                    MessagingCenter.Send<CategoriesViewModel, Category>(this, "ChangeCatagory", cat);
                     App.Current.MainPage.SendBackButtonPressed();
                 }
             });
